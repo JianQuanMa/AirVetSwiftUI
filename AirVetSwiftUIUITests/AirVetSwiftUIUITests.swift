@@ -8,28 +8,55 @@
 import XCTest
 
 final class AirVetSwiftUIUITests: XCTestCase {
-
+    
+    var app: XCUIApplication!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
+        // Set up the application to be tested
         continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+        app = XCUIApplication()
+        app.launchArguments.append("--uitesting")
+        app.launch()
     }
-
+    
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        // Clean up after tests
+        app = nil
     }
-
+    
     func testExample() throws {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
-
+        
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
-
+    
+    func testAddTask() throws {
+        // Given
+        let taskName = "Test Task"
+        let taskDescription = "This is a test task."
+        
+        // When
+        app.navigationBars["Tasks"].buttons["Add"].tap()
+        
+        let nameField = app.textFields["Task Name"]
+        XCTAssertTrue(nameField.exists)
+        nameField.tap()
+        nameField.typeText(taskName)
+        
+        let descriptionField = app.textFields["Task Description"]
+        XCTAssertTrue(descriptionField.exists)
+        descriptionField.tap()
+        descriptionField.typeText(taskDescription)
+        
+        app.buttons["Save"].tap()
+        
+        // Then
+        let taskCell = app.staticTexts[taskName]
+        XCTAssertTrue(taskCell.exists)
+    }
+    
     func testLaunchPerformance() throws {
         if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
             // This measures how long it takes to launch your application.
