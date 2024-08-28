@@ -19,6 +19,7 @@
 		4EF30CB12C7ECA910039F0E4 /* TaskRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF30CB02C7ECA910039F0E4 /* TaskRowView.swift */; };
 		4EF30CB32C7ECAFF0039F0E4 /* AddTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF30CB22C7ECAFF0039F0E4 /* AddTaskView.swift */; };
 		4EF30CB52C7EDF730039F0E4 /* EditTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF30CB42C7EDF730039F0E4 /* EditTaskView.swift */; };
+		4EF30CB72C7EE21C0039F0E4 /* TaskListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF30CB62C7EE21C0039F0E4 /* TaskListViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		4EF30CB02C7ECA910039F0E4 /* TaskRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRowView.swift; sourceTree = "<group>"; };
 		4EF30CB22C7ECAFF0039F0E4 /* AddTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskView.swift; sourceTree = "<group>"; };
 		4EF30CB42C7EDF730039F0E4 /* EditTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskView.swift; sourceTree = "<group>"; };
+		4EF30CB62C7EE21C0039F0E4 /* TaskListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				4EF30C932C7EC4AB0039F0E4 /* AirVetSwiftUITests.swift */,
+				4EF30CB62C7EE21C0039F0E4 /* TaskListViewModelTests.swift */,
 			);
 			path = AirVetSwiftUITests;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4EF30C942C7EC4AB0039F0E4 /* AirVetSwiftUITests.swift in Sources */,
+				4EF30CB72C7EE21C0039F0E4 /* TaskListViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
