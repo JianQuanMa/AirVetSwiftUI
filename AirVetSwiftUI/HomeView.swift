@@ -15,7 +15,9 @@ struct HomeView: View {
         NavigationView {
             List {
                 ForEach(viewModel.tasks) { task in
-                    TaskRowView(task: task, viewModel: viewModel)
+                    NavigationLink(destination: EditTaskView(viewModel: viewModel, task: task)) {
+                        TaskRowView(task: task, viewModel: viewModel)
+                    }
                 }
                 .onDelete(perform: deleteTask)
             }
@@ -30,9 +32,9 @@ struct HomeView: View {
             }
         }
     }
-    
+
     private func deleteTask(at offsets: IndexSet) {
-            viewModel.deleteTasks(at: offsets)
+        viewModel.deleteTasks(at: offsets)
     }
 }
 
@@ -41,4 +43,5 @@ struct HomeView_Previews: PreviewProvider {
         HomeView()
     }
 }
+
 
