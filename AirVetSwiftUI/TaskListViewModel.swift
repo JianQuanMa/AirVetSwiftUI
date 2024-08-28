@@ -13,8 +13,18 @@ class TaskListViewModel: ObservableObject {
             saveTasks()
         }
     }
+    
+    @Published var showUnfinishedOnly: Bool = false
 
     private let tasksKey = "tasksKey"
+
+    var filteredTasks: [Task] {
+        if showUnfinishedOnly {
+            return tasks.filter { !$0.isCompleted }
+        } else {
+            return tasks
+        }
+    }
 
     init() {
         loadTasks()
@@ -24,21 +34,21 @@ class TaskListViewModel: ObservableObject {
         let newTask = Task(name: name, description: description)
         tasks.append(newTask)
     }
-    
-    func deleteTasks(at offsets: IndexSet) {
-         tasks.remove(atOffsets: offsets)
-     }
-    
-    func updateTask(id: UUID, name: String, description: String) {
-         if let index = tasks.firstIndex(where: { $0.id == id }) {
-             tasks[index].name = name
-             tasks[index].description = description
-         }
-     }
 
     func toggleTaskCompletion(task: Task) {
         if let index = tasks.firstIndex(where: { $0.id == task.id }) {
             tasks[index].isCompleted.toggle()
+        }
+    }
+
+    func deleteTasks(at offsets: IndexSet) {
+        tasks.remove(atOffsets: offsets)
+    }
+
+    func updateTask(id: UUID, name: String, description: String) {
+        if let index = tasks.firstIndex(where: { $0.id == id }) {
+            tasks[index].name = name
+            tasks[index].description = description
         }
     }
 

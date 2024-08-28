@@ -13,13 +13,19 @@ struct HomeView: View {
 
     var body: some View {
         NavigationView {
-            List {
-                ForEach(viewModel.tasks) { task in
-                    NavigationLink(destination: EditTaskView(viewModel: viewModel, task: task)) {
-                        TaskRowView(task: task, viewModel: viewModel)
-                    }
+            VStack {
+                Toggle(isOn: $viewModel.showUnfinishedOnly) {
+                    Text("Unfinished Only")
                 }
-                .onDelete(perform: deleteTask)
+
+                List {
+                    ForEach(viewModel.filteredTasks) { task in
+                        NavigationLink(destination: EditTaskView(viewModel: viewModel, task: task)) {
+                            TaskRowView(task: task, viewModel: viewModel)
+                        }
+                    }
+                    .onDelete(perform: deleteTask)
+                }
             }
             .navigationTitle("Tasks")
             .navigationBarItems(trailing: Button(action: {
@@ -43,5 +49,6 @@ struct HomeView_Previews: PreviewProvider {
         HomeView()
     }
 }
+
 
 
