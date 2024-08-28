@@ -14,6 +14,8 @@
 		4EF30C942C7EC4AB0039F0E4 /* AirVetSwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF30C932C7EC4AB0039F0E4 /* AirVetSwiftUITests.swift */; };
 		4EF30C9E2C7EC4AB0039F0E4 /* AirVetSwiftUIUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF30C9D2C7EC4AB0039F0E4 /* AirVetSwiftUIUITests.swift */; };
 		4EF30CA02C7EC4AB0039F0E4 /* AirVetSwiftUIUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF30C9F2C7EC4AB0039F0E4 /* AirVetSwiftUIUITestsLaunchTests.swift */; };
+		4EF30CAD2C7EC4C00039F0E4 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF30CAC2C7EC4C00039F0E4 /* TaskModel.swift */; };
+		4EF30CAF2C7EC4E10039F0E4 /* TaskListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF30CAE2C7EC4E10039F0E4 /* TaskListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,8 @@
 		4EF30C992C7EC4AB0039F0E4 /* AirVetSwiftUIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AirVetSwiftUIUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EF30C9D2C7EC4AB0039F0E4 /* AirVetSwiftUIUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirVetSwiftUIUITests.swift; sourceTree = "<group>"; };
 		4EF30C9F2C7EC4AB0039F0E4 /* AirVetSwiftUIUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirVetSwiftUIUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		4EF30CAC2C7EC4C00039F0E4 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
+		4EF30CAE2C7EC4E10039F0E4 /* TaskListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +102,8 @@
 				4EF30C842C7EC4AA0039F0E4 /* ContentView.swift */,
 				4EF30C862C7EC4AB0039F0E4 /* Assets.xcassets */,
 				4EF30C882C7EC4AB0039F0E4 /* Preview Content */,
+				4EF30CAC2C7EC4C00039F0E4 /* TaskModel.swift */,
+				4EF30CAE2C7EC4E10039F0E4 /* TaskListViewModel.swift */,
 			);
 			path = AirVetSwiftUI;
 			sourceTree = "<group>";
@@ -257,6 +263,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EF30CAD2C7EC4C00039F0E4 /* TaskModel.swift in Sources */,
+				4EF30CAF2C7EC4E10039F0E4 /* TaskListViewModel.swift in Sources */,
 				4EF30C852C7EC4AA0039F0E4 /* ContentView.swift in Sources */,
 				4EF30C832C7EC4AA0039F0E4 /* AirVetSwiftUIApp.swift in Sources */,
 			);

@@ -7,18 +7,33 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct HomeView: View {
+    @StateObject var viewModel = TaskListViewModel()
+    @State private var showingAddTaskView = false
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationView {
+            List {
+                ForEach(viewModel.tasks) { task in
+                    TaskRowView(task: task, viewModel: viewModel)
+                }
+            }
+            .navigationTitle("Tasks")
+            .navigationBarItems(trailing: Button(action: {
+                showingAddTaskView = true
+            }) {
+                Image(systemName: "plus")
+            })
+            .sheet(isPresented: $showingAddTaskView) {
+                AddTaskView(viewModel: viewModel)
+            }
         }
-        .padding()
     }
 }
 
-#Preview {
-    ContentView()
+struct HomeView_Previews: PreviewProvider {
+    static var previews: some View {
+        HomeView()
+    }
 }
+
