@@ -16,6 +16,8 @@
 		4EF30CA02C7EC4AB0039F0E4 /* AirVetSwiftUIUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF30C9F2C7EC4AB0039F0E4 /* AirVetSwiftUIUITestsLaunchTests.swift */; };
 		4EF30CAD2C7EC4C00039F0E4 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF30CAC2C7EC4C00039F0E4 /* TaskModel.swift */; };
 		4EF30CAF2C7EC4E10039F0E4 /* TaskListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF30CAE2C7EC4E10039F0E4 /* TaskListViewModel.swift */; };
+		4EF30CB12C7ECA910039F0E4 /* TaskRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF30CB02C7ECA910039F0E4 /* TaskRowView.swift */; };
+		4EF30CB32C7ECAFF0039F0E4 /* AddTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF30CB22C7ECAFF0039F0E4 /* AddTaskView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,8 @@
 		4EF30C9F2C7EC4AB0039F0E4 /* AirVetSwiftUIUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirVetSwiftUIUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		4EF30CAC2C7EC4C00039F0E4 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 		4EF30CAE2C7EC4E10039F0E4 /* TaskListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewModel.swift; sourceTree = "<group>"; };
+		4EF30CB02C7ECA910039F0E4 /* TaskRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRowView.swift; sourceTree = "<group>"; };
+		4EF30CB22C7ECAFF0039F0E4 /* AddTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +108,8 @@
 				4EF30C882C7EC4AB0039F0E4 /* Preview Content */,
 				4EF30CAC2C7EC4C00039F0E4 /* TaskModel.swift */,
 				4EF30CAE2C7EC4E10039F0E4 /* TaskListViewModel.swift */,
+				4EF30CB02C7ECA910039F0E4 /* TaskRowView.swift */,
+				4EF30CB22C7ECAFF0039F0E4 /* AddTaskView.swift */,
 			);
 			path = AirVetSwiftUI;
 			sourceTree = "<group>";
@@ -263,8 +269,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EF30CB12C7ECA910039F0E4 /* TaskRowView.swift in Sources */,
 				4EF30CAD2C7EC4C00039F0E4 /* TaskModel.swift in Sources */,
 				4EF30CAF2C7EC4E10039F0E4 /* TaskListViewModel.swift in Sources */,
+				4EF30CB32C7ECAFF0039F0E4 /* AddTaskView.swift in Sources */,
 				4EF30C852C7EC4AA0039F0E4 /* ContentView.swift in Sources */,
 				4EF30C832C7EC4AA0039F0E4 /* AirVetSwiftUIApp.swift in Sources */,
 			);
