@@ -17,6 +17,7 @@ struct HomeView: View {
                 ForEach(viewModel.tasks) { task in
                     TaskRowView(task: task, viewModel: viewModel)
                 }
+                .onDelete(perform: deleteTask)
             }
             .navigationTitle("Tasks")
             .navigationBarItems(trailing: Button(action: {
@@ -28,6 +29,10 @@ struct HomeView: View {
                 AddTaskView(viewModel: viewModel)
             }
         }
+    }
+    
+    private func deleteTask(at offsets: IndexSet) {
+            viewModel.deleteTasks(at: offsets)
     }
 }
 

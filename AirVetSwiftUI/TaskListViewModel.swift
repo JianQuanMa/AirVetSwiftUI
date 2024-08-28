@@ -24,6 +24,10 @@ class TaskListViewModel: ObservableObject {
         let newTask = Task(name: name, description: description)
         tasks.append(newTask)
     }
+    
+    func deleteTasks(at offsets: IndexSet) {
+         tasks.remove(atOffsets: offsets)
+     }
 
     func toggleTaskCompletion(task: Task) {
         if let index = tasks.firstIndex(where: { $0.id == task.id }) {
