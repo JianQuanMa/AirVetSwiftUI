@@ -33,8 +33,6 @@ struct EditTaskView: View {
 
             Button(action: {
                 onSave(.init(id: taskID, name: name, description: description))
-//                viewModel.updateTask(id: task.id, name: name, description: description)
-//                presentationMode.wrappedValue.dismiss()
             }) {
                 Text("Save")
                     .frame(maxWidth: .infinity)
@@ -55,11 +53,3 @@ struct EditTaskView: View {
         !name.isEmpty && !description.isEmpty
     }
 }
-
-//struct EditTaskView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        EditTaskView(viewModel: TaskListViewModel(), task: Task(name: "Sample Task", description: "Sample Description"))
-//    }
-//}
-
-
