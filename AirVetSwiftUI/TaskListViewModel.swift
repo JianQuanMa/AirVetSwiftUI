@@ -113,6 +113,10 @@ class TaskListViewModel: ObservableObject {
         path.removeLast()
     }
     
+    var allFilteredTasks: [UserTask] {
+        _tasks
+    }
+    
     func onNewName(_ newName: String) {
         self.addTaskView?.name = newName
     }
