@@ -9,38 +9,70 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject var viewModel = TaskListViewModel()
-    @State private var showingAddTaskView = false
 
     var body: some View {
-        NavigationView {
+        NavigationStack(path: $viewModel.path) {
             VStack {
-                Toggle(isOn: $viewModel.showUnfinishedOnly) {
+                Toggle(isOn: $viewModel.showUnfinishedOnly.animation(.default)) {
                     Text("Unfinished Only")
                 }
-
+                .padding(.horizontal, 16)
+                
                 List {
-                    ForEach(viewModel.filteredTasks) { task in
-                        NavigationLink(destination: EditTaskView(viewModel: viewModel, task: task)) {
+                    ForEach(viewModel.tasks) { task in
+                        ZStack {
                             TaskRowView(task: task, viewModel: viewModel)
                         }
+                        .contentShape(Rectangle())
+                        .frame(maxWidth: .infinity)
+                        .onTapGesture {
+                            viewModel.onTaskTapped(task)
+                        }
                     }
-                    .onDelete(perform: deleteTask)
+                    .onDelete { indexSet in
+                        viewModel.onDelete(indexSet)
+                    }
                 }
             }
             .navigationTitle("Tasks")
             .navigationBarItems(trailing: Button(action: {
-                showingAddTaskView = true
+                viewModel.onAddTaskButtonTapped()
             }) {
                 Image(systemName: "plus")
             })
-            .sheet(isPresented: $showingAddTaskView) {
-                AddTaskView(viewModel: viewModel)
+            .onAppear {
+                viewModel.onAppear()
+            }
+            .sheet(item: $viewModel.addTaskView) { taskViewModel in
+                NavigationStack {
+                    Form {
+                        TextField("Task Name", text: .init(
+                            get: { taskViewModel.name },
+                            set: viewModel.onNewName
+                        ))
+                        TextField("Task Description", text: .init(
+                            get: { taskViewModel.description },
+                            set: viewModel.onNewDescription
+                        ))
+                    }
+                    .navigationTitle("Add Task")
+                    .navigationBarItems(trailing: Button("Save") {
+                        if taskViewModel.passesValidation {
+                            viewModel.onAddSaveTapped(taskViewModel)
+                        }
+                    })
+                }
+            }
+            
+            .navigationDestination(for: TaskListViewModel.PushedDestination.self) { dest in
+                switch dest {
+                case .edit(let task):
+                    EditTaskView(task: task, onSave: { edited in
+                        viewModel.onEditSaveTapped(edited)
+                    })
+                }
             }
         }
-    }
-
-    private func deleteTask(at offsets: IndexSet) {
-        viewModel.deleteTasks(at: offsets)
     }
 }
 

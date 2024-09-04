@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct TaskRowView: View {
-    var task: Task
-    var viewModel: TaskListViewModel
+    let task: UserTask
+    let viewModel: TaskListViewModel
 
     var body: some View {
         HStack {
@@ -27,13 +27,14 @@ struct TaskRowView: View {
                     .font(.subheadline)
                     .foregroundColor(.gray)
             }
+
+            Spacer()
         }
-        .padding()
     }
 }
 
 struct TaskRowView_Previews: PreviewProvider {
     static var previews: some View {
-        TaskRowView(task: Task(name: "Sample Task", description: "Sample Description"), viewModel: TaskListViewModel())
+        TaskRowView(task: UserTask(name: "Sample Task", description: "Sample Description"), viewModel: TaskListViewModel())
     }
 }

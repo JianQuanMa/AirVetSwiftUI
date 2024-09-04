@@ -8,16 +8,18 @@
 import SwiftUI
 
 struct EditTaskView: View {
-    @Environment(\.presentationMode) var presentationMode
-    @ObservedObject var viewModel: TaskListViewModel
-    var task: Task
-
     @State private var name: String
     @State private var description: String
 
-    init(viewModel: TaskListViewModel, task: Task) {
-        self.viewModel = viewModel
-        self.task = task
+    private let onSave: (AddTaskViewModel) -> Void
+    private let taskID: UUID
+
+    init(
+        task: UserTask,
+        onSave: @escaping (AddTaskViewModel) -> Void
+    ) {
+        self.onSave = onSave
+        self.taskID = task.id
         _name = State(initialValue: task.name)
         _description = State(initialValue: task.description)
     }
@@ -30,8 +32,9 @@ struct EditTaskView: View {
             }
 
             Button(action: {
-                viewModel.updateTask(id: task.id, name: name, description: description)
-                presentationMode.wrappedValue.dismiss()
+                onSave(.init(id: taskID, name: name, description: description))
+//                viewModel.updateTask(id: task.id, name: name, description: description)
+//                presentationMode.wrappedValue.dismiss()
             }) {
                 Text("Save")
                     .frame(maxWidth: .infinity)
@@ -47,10 +50,10 @@ struct EditTaskView: View {
     }
 }
 
-struct EditTaskView_Previews: PreviewProvider {
-    static var previews: some View {
-        EditTaskView(viewModel: TaskListViewModel(), task: Task(name: "Sample Task", description: "Sample Description"))
-    }
-}
+//struct EditTaskView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        EditTaskView(viewModel: TaskListViewModel(), task: Task(name: "Sample Task", description: "Sample Description"))
+//    }
+//}
 
 

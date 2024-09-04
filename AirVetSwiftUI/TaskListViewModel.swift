@@ -7,62 +7,139 @@
 import Foundation
 import Combine
 
+struct AddTaskViewModel: Identifiable {
+    
+    let id: UUID
+    var name = ""
+    var description = ""
+
+    init(
+        id: UUID = UUID(),
+        name: String = "",
+        description: String = ""
+    ) {
+        self.id = id
+        self.name = name
+        self.description = description
+    }
+    
+    // TODO: - delete this
+    var passesValidation: Bool {
+        !name.isEmpty && !description.isEmpty
+    }
+}
+
+import SwiftUI
+
 class TaskListViewModel: ObservableObject {
-    @Published var tasks: [Task] = [] {
+    enum PushedDestination: Hashable {
+        case edit(UserTask)
+    }
+    
+    @Published var showUnfinishedOnly: Bool = false
+    @Published var addTaskView: AddTaskViewModel?
+    @Published var path = NavigationPath()
+    @Published private var _tasks: [UserTask] = [] {
         didSet {
             saveTasks()
         }
     }
     
-    @Published var showUnfinishedOnly: Bool = false
+    let userDefaults: UserDefaults
 
-    private let tasksKey = "tasksKey"
-
-    var filteredTasks: [Task] {
+    var tasks: [UserTask] {
         if showUnfinishedOnly {
-            return tasks.filter { !$0.isCompleted }
+            return _tasks.filter { !$0.isCompleted }
         } else {
-            return tasks
+            return _tasks
         }
     }
 
-    init() {
-        loadTasks()
+    init(userDefaults: UserDefaults = .standard) {
+        self.userDefaults = userDefaults
     }
-
-    func addTask(name: String, description: String) {
-        let newTask = Task(name: name, description: description)
-        tasks.append(newTask)
-    }
-
-    func toggleTaskCompletion(task: Task) {
-        if let index = tasks.firstIndex(where: { $0.id == task.id }) {
-            tasks[index].isCompleted.toggle()
+    
+    func onAppear() {
+        if let savedTasksData = userDefaults.data(forKey: tasksKey),
+           let decodedTasks = try? JSONDecoder().decode([UserTask].self, from: savedTasksData) {
+            
+            _tasks = decodedTasks
         }
     }
+    
+    func onAddTaskButtonTapped() {
+        addTaskView = AddTaskViewModel()
+    }
+    
+    func onTaskTapped(_ task: UserTask) {
+        path.append(PushedDestination.edit(task))
+    }
 
-    func deleteTasks(at offsets: IndexSet) {
-        tasks.remove(atOffsets: offsets)
+    func onAddSaveTapped(_ new: AddTaskViewModel) {
+        addTaskView = nil
+        
+        Task { @MainActor in
+            try? await Task.sleep(for: .seconds(0.5))
+            
+            withAnimation(.default) {
+                _tasks.append(.init(
+                    id: UUID(),
+                    name: new.name,
+                    description: new.description,
+                    isCompleted: false
+                ))
+            }
+        }
+    }
+    
+    func onNewDescription(_ description: String) {
+        self.addTaskView?.description = description
+    }
+    
+    func onEditSaveTapped(_ edited: AddTaskViewModel) {
+        if let index = _tasks.firstIndex(where: {
+            $0.id == edited.id
+        }) {
+            let old = _tasks[index]
+            
+            _tasks[index] = .init(
+                id: edited.id,
+                name: edited.name,
+                description: edited.description,
+                isCompleted: old.isCompleted
+            )
+        }
+        
+        path.removeLast()
+    }
+    
+    func onNewName(_ newName: String) {
+        self.addTaskView?.name = newName
+    }
+    
+    func onDelete(_ offsets: IndexSet) {
+        _tasks.remove(atOffsets: offsets)
+    }
+
+    func toggleTaskCompletion(task: UserTask) {
+        if let index = _tasks.firstIndex(where: { $0.id == task.id }) {
+            _tasks[index].isCompleted.toggle()
+        }
     }
 
     func updateTask(id: UUID, name: String, description: String) {
-        if let index = tasks.firstIndex(where: { $0.id == id }) {
-            tasks[index].name = name
-            tasks[index].description = description
+        if let index = _tasks.firstIndex(where: { $0.id == id }) {
+            _tasks[index].name = name
+            _tasks[index].description = description
         }
     }
 
     private func saveTasks() {
-        if let encodedTasks = try? JSONEncoder().encode(tasks) {
-            UserDefaults.standard.set(encodedTasks, forKey: tasksKey)
-        }
-    }
-
-    private func loadTasks() {
-        if let savedTasksData = UserDefaults.standard.data(forKey: tasksKey),
-           let decodedTasks = try? JSONDecoder().decode([Task].self, from: savedTasksData) {
-            tasks = decodedTasks
+        if let encodedTasks = try? JSONEncoder().encode(_tasks) {
+            userDefaults.set(encodedTasks, forKey: tasksKey)
         }
     }
 }
+
+private let tasksKey = "tasksKey"
 
