@@ -57,9 +57,7 @@ struct HomeView: View {
                     }
                     .navigationTitle("Add Task")
                     .navigationBarItems(trailing: Button("Save") {
-                        if taskViewModel.passesValidation {
                             viewModel.onAddSaveTapped(taskViewModel)
-                        }
                     }.disabled(!taskViewModel.passesValidation))
                 }
             }
