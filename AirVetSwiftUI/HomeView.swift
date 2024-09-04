@@ -60,7 +60,7 @@ struct HomeView: View {
                         if taskViewModel.passesValidation {
                             viewModel.onAddSaveTapped(taskViewModel)
                         }
-                    })
+                    }.disabled(!taskViewModel.passesValidation))
                 }
             }
             
