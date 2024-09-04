@@ -43,10 +43,16 @@ struct EditTaskView: View {
                     .foregroundColor(.white)
                     .cornerRadius(10)
                     .padding(.horizontal)
+                    .disabled(!isValid)
+                    .opacity(isValid ? 1.0 : 0.5)
             }
         }
         .navigationTitle("Edit Task")
         .padding(.bottom) // To add some space at the bottom of the screen
+    }
+    
+    private var isValid: Bool {
+        !name.isEmpty && !description.isEmpty
     }
 }
 
